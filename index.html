@@ -1,1 +1,29 @@
-
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Crystal Invest</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Crystal Invest</h1>
+    <p>Simple compound interest calculator</p>
+  </header>
+  <main>
+    <section id="calculator">
+      <h2>Compound Interest Calculator</h2>
+      <form id="calcForm">
+        <label>Principal: <input type="number" id="principal" required step="0.01" value="1000"></label><br>
+        <label>Annual Rate (%): <input type="number" id="rate" required step="0.01" value="5"></label><br>
+        <label>Years: <input type="number" id="years" required step="1" value="10"></label><br>
+        <label>Compounds per year: <input type="number" id="n" required step="1" value="12"></label><br>
+        <button type="submit">Calculate</button>
+      </form>
+      <div id="result" aria-live="polite"></div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
