@@ -107,93 +107,45 @@
       });
     });
 
-    const googleSheetsEndpoint = 'appscript'; // Replace with your actual Google Apps Script endpoint  
-    const homePage = 'homepage.html';
-    const loginForm = document.getElementById('login-form');
-    const signupForm = document.getElementById('signup-form');
-    const loginEmail = document.getElementById('login-email');
-    const loginPassword = document.getElementById('login-password');
-    const signupName = document.getElementById('signup-name');
-    const signupUsername = document.getElementById('signup-username');
-    const signupEmail = document.getElementById('signup-email');
-    const signupPhone = document.getElementById('signup-phone');
-    const signupDob = document.getElementById('signup-dob');
-    const signupPassword = document.getElementById('signup-password');
-    const signupConfirm = document.getElementById('signup-confirm');
+  const API_URL = 'https://script.google.com/macros/s/AKfycbwRAgPpN36OZsxeXp8XjewYMLlat3LLfn_2Cau-FZbPFevmcBSoIYdv7lnHHKvVORhf/exec';
 
-    async function sendSheetRequest(action, data) {
-      try {
-        const response = await fetch(`${googleSheetsEndpoint}?action=${encodeURIComponent(action)}`, {
-          method: 'POST',
-          mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        });
-        return await response.json();
-      } catch (error) {
-        console.error('Google Sheets request failed:', error);
-        return { status: 'error', message: 'Unable to connect to the sheet endpoint.' };
-      }
-    }
+document.getElementById('signupForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const password = document.getElementById('password').value;
+  const confirm = document.getElementById('confirmPassword').value;
+  if(password!== confirm) return alert('Passwords do not match');
+  
+  const data = {
+    action: 'signup',
+    fullName: document.getElementById('fullName').value,
+    username: document.getElementById('username').value,
+    email: document.getElementById('email').value,
+    phone: document.getElementById('phone').value,
+    dob: document.getElementById('dob').value,
+    password: password
+  };
+  
+  const res = await fetch(API_URL, {method: 'POST', body: JSON.stringify(data)});
+  const result = await res.json();
+  alert(result.msg);
+});
 
-    loginForm.addEventListener('submit', async event => {
-      event.preventDefault();
-      const email = loginEmail.value.trim();
-      const password = loginPassword.value;
-      if (!email || !password) {
-        alert('Please enter both email and password.');
-        return;
-      }
-      const result = await sendSheetRequest('login', { email, password });
-      if (result.status === 'success') {
-        window.location.href = homePage;
-      } else {
-        alert(result.message || 'Login failed. Please check your credentials.');
-      }
-    });
-
-    signupForm.addEventListener('submit', async event => {
-      event.preventDefault();
-      const name = signupName.value.trim();
-      const username = signupUsername.value.trim();
-      const email = signupEmail.value.trim();
-      const phone = signupPhone.value.trim();
-      const dob = signupDob.value;
-      const password = signupPassword.value;
-      const confirm = signupConfirm.value;
-
-      if (!name || !username || !email || !phone || !dob || !password || !confirm) {
-        alert('Please fill out all signup fields.');
-        return;
-      }
-      if (password !== confirm) {
-        alert('Passwords do not match.');
-        return;
-      }
-
-      const result = await sendSheetRequest('signup', {
-        name,
-        username,
-        email,
-        phone,
-        dob,
-        password
-      });
-
-      if (result.status === 'success') {
-        alert('Signup successful. You can now log in.');
-        signupForm.reset();
-        loginForm.classList.add('active');
-        signupForm.classList.remove('active');
-        document.querySelectorAll('.form-switch button').forEach(tab => {
-          tab.classList.toggle('active', tab.dataset.target === 'login-form');
-        });
-      } else {
-        alert(result.message || 'Signup failed. Please try again.');
-      }
-    });
+async function loginUser() {
+  const data = {
+    action: 'login',
+    username: document.getElementById('loginUsername').value,
+    password: document.getElementById('loginPassword').value
+  };
+  const res = await fetch(API_URL, {method: 'POST', body: JSON.stringify(data)});
+  const result = await res.json();
+  if(result.status === 'success') {
+    localStorage.setItem('user', result.username);
+    window.location.href = 'homepage.html'; // go to game
+  } else {
+    alert(result.msg);
+  }
+}
 
 
     
