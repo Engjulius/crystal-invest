@@ -1,0 +1,270 @@
+ 
+    :root {
+      --background: #0f172a;
+      --card: #14233c;
+      --panel: #1e2a4f;
+      --text: #e2e8f0;
+      --accent: #38bdf8;
+      --accent-dark: #0ea5e9;
+      --shadow: rgba(0, 0, 0, 0.35);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background: linear-gradient(135deg, #071422 0%, #0f172a 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .container {
+      width: min(520px, 100%);
+      background: var(--card);
+      border-radius: 24px;
+      box-shadow: 0 24px 80px var(--shadow);
+      overflow: hidden;
+    }
+    .form-switch {
+      display: flex;
+      background: var(--panel);
+    }
+    .form-switch button {
+      flex: 1;
+      border: none;
+      background: transparent;
+      color: var(--text);
+      padding: 18px 0;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.25s ease;
+    }
+    .form-switch button.active,
+    .form-switch button:hover {
+      background: linear-gradient(90deg, rgba(56,189,248,.14), rgba(14,165,233,.1));
+    }
+    .card {
+      padding: 32px;
+    }
+    .card h1 {
+      font-size: 1.75rem;
+      margin-bottom: 16px;
+    }
+    .card p {
+      color: #cbd5e1;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    .field {
+      margin-bottom: 18px;
+      position: relative;
+    }
+    .field input.has-toggle {
+      padding-right: 52px;
+    }
+    .password-toggle {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.94rem;
+      color: #cbd5e1;
+    }
+    .field input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #374151;
+      border-radius: 14px;
+      background: #0f172a;
+      color: var(--text);
+      font-size: 1rem;
+    }
+    .field input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(56,189,248,0.12);
+    }
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 8px;
+    }
+    .actions a,
+    .actions button {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .actions button {
+      background: var(--accent);
+      color: #0f172a;
+      border: none;
+      border-radius: 14px;
+      padding: 14px 20px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .actions button:hover {
+      background: var(--accent-dark);
+    }
+    .switch-link {
+      margin-top: 24px;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 0.95rem;
+    }
+    .switch-link button {
+      background: none;
+      border: none;
+      color: var(--accent);
+      cursor: pointer;
+      padding: 0;
+      font: inherit;
+    }
+    form {
+      display: none;
+    }
+    form.active {
+      display: block;
+    }
+    @media (max-width: 768px) {
+      body {
+        padding: 16px;
+      }
+      .container {
+        width: 100%;
+        border-radius: 20px;
+      }
+      .card {
+        padding: 28px;
+      }
+      .card h1 {
+        font-size: 1.5rem;
+      }
+      .form-switch button {
+        padding: 16px 0;
+        font-size: 0.95rem;
+      }
+      .field input {
+        padding: 12px 14px;
+        font-size: 16px;
+      }
+      .password-toggle {
+        width: 32px;
+        height: 32px;
+      }
+      .field input.has-toggle {
+        padding-right: 44px;
+      }
+      .actions button {
+        padding: 12px 18px;
+        font-size: 0.9rem;
+      }
+    }
+    @media (max-width: 480px) {
+      body {
+        padding: 12px;
+      }
+      .container {
+        border-radius: 16px;
+      }
+      .card {
+        padding: 20px;
+      }
+      .card h1 {
+        font-size: 1.25rem;
+        margin-bottom: 12px;
+      }
+      .card p {
+        margin-bottom: 20px;
+        font-size: 0.9rem;
+      }
+      .form-switch {
+        display: flex;
+        gap: 0;
+      }
+      .form-switch button {
+        padding: 14px 0;
+        font-size: 0.85rem;
+      }
+      .field {
+        margin-bottom: 16px;
+      }
+      .field label {
+        font-size: 0.85rem;
+        margin-bottom: 6px;
+      }
+      .field input {
+        padding: 10px 12px;
+        font-size: 16px;
+        border-radius: 10px;
+      }
+      .password-toggle {
+        right: 12px;
+        width: 28px;
+        height: 28px;
+      }
+      .password-toggle svg {
+        width: 18px;
+        height: 18px;
+      }
+      .field input.has-toggle {
+        padding-right: 40px;
+      }
+      .actions {
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 6px;
+      }
+      .actions a {
+        font-size: 0.85rem;
+      }
+      .actions button {
+        width: 100%;
+        padding: 12px 16px;
+        font-size: 0.9rem;
+      }
+      .switch-link {
+        margin-top: 20px;
+        font-size: 0.85rem;
+      }
+      .switch-link button {
+        font-size: 0.85rem;
+      }
+    }
+    @media (max-width: 360px) {
+      .card {
+        padding: 16px;
+      }
+      .card h1 {
+        font-size: 1.1rem;
+      }
+      .form-switch button {
+        padding: 12px 0;
+        font-size: 0.8rem;
+      }
+      .field input {
+        padding: 10px 12px;
+        font-size: 16px;
+      }
+    }
